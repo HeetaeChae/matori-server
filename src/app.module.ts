@@ -5,6 +5,17 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PlacesModule } from './places/places.module';
 
+import {
+  Comment,
+  Follow,
+  Like,
+  Marker,
+  Shop,
+  Story,
+  Thumbsup,
+  User,
+} from './entities/_index.entity';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,7 +33,7 @@ import { PlacesModule } from './places/places.module';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
         synchronize: process.env.NODE_ENV === 'development',
-        entities: [],
+        entities: [Comment, Follow, Like, Marker, Shop, Story, Thumbsup, User],
       }),
     }),
     PlacesModule,

@@ -1,9 +1,16 @@
-import { IsBoolean, IsNumber, IsString } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { CommonEntity } from './common.entity';
+import { Marker } from './marker.entity';
+import { Story } from './story.entity';
 
 @Entity()
-export class ShopEntity extends CommonEntity {
+export class Shop extends CommonEntity {
   @PrimaryGeneratedColumn({ name: '가게 아이디' })
   id: number;
 
@@ -51,4 +58,10 @@ export class ShopEntity extends CommonEntity {
 
   @Column({ name: '주차' })
   parking: boolean;
+
+  @OneToOne(() => Marker, (marker) => marker.shop)
+  marker: Marker;
+
+  @OneToMany(() => Story, (story) => story.shop)
+  stories: Story[];
 }
