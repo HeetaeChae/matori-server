@@ -15,6 +15,7 @@ import {
   Thumbsup,
   User,
 } from './entities/_index.entity';
+import { StoriesModule } from './stories/stories.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import {
       }),
     }),
     PlacesModule,
+    StoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
