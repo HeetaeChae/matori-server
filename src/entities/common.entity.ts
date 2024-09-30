@@ -2,21 +2,17 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class CommonEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @CreateDateColumn({ name: '등록일자' })
+  @CreateDateColumn({ comment: '등록일자', name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: '수정일자' })
+  @UpdateDateColumn({ comment: '수정일자', name: 'updated_at' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: '삭제일자', nullable: true })
+  @DeleteDateColumn({ comment: '삭제일자', name: 'deleted_at', nullable: true })
   deletedAt: Date | null;
 }

@@ -1,47 +1,48 @@
-import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { CommonEntity } from './common.entity';
-import { Story } from './story.entity';
-import { Follow } from './follow.entity';
+
+import { Story, Follow, Like, Comment } from './_index.entity';
 
 @Entity()
 export class User extends CommonEntity {
   @PrimaryGeneratedColumn({
-    name: '유저 아이디',
+    comment: '유저 아이디',
   })
   id: number;
 
   @Column({
-    name: '이메일',
+    comment: '이메일',
     unique: true,
   })
-  @IsEmail()
   email: string;
 
   @Column({
-    name: '비밀번호',
+    comment: '비밀번호',
   })
-  @IsString()
   password: string;
 
   @Column({
-    name: '닉네임',
+    comment: '닉네임',
     unique: true,
   })
-  @IsString()
-  @MinLength(2)
-  @MaxLength(6)
   nickname: string;
 
-  @Column({ name: '자기소개', nullable: true })
-  @MaxLength(100)
+  @Column({ comment: '자기소개', nullable: true })
   intro: string;
 
-  @Column({ name: '아바타', nullable: true })
+  @Column({ comment: '아바타', nullable: true })
   avatar: string;
 
   @OneToMany(() => Story, (story) => story.user, { cascade: ['soft-remove'] })
   stories: Story[];
+
+  @OneToMany(() => Like, (like) => like.user, { cascade: ['soft-remove'] })
+  likes: Like[];
+
+  @OneToMany(() => Comment, (comment) => comment.user, {
+    cascade: ['soft-remove'],
+  })
+  comments: Comment[];
 
   @OneToMany(() => Follow, (follow) => follow.following, {
     cascade: ['soft-remove'],

@@ -16,6 +16,7 @@ import {
   User,
 } from './entities/_index.entity';
 import { StoriesModule } from './stories/stories.module';
+import { LikesModule } from './likes/likes.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { StoriesModule } from './stories/stories.module';
     }),
     PlacesModule,
     StoriesModule,
+    LikesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

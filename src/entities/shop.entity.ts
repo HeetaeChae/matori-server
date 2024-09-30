@@ -5,58 +5,58 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { Marker, Story } from './_index.entity';
 import { CommonEntity } from './common.entity';
-import { Marker } from './marker.entity';
-import { Story } from './story.entity';
 
 @Entity()
 export class Shop extends CommonEntity {
-  @PrimaryGeneratedColumn({ name: '가게 아이디' })
+  @PrimaryGeneratedColumn({ comment: '가게 아이디' })
   id: number;
 
-  @Column({ name: '장소 아이디' })
+  @Column({ comment: '장소 아이디', name: 'place_id' })
   placeId: string;
 
-  @Column({ name: '이름' })
+  @Column({ comment: '이름' })
   name: string;
 
-  @Column({ name: '주소' })
+  @Column({ comment: '주소' })
   address: string;
 
-  @Column({ name: '전화번호' })
+  @Column({ comment: '전화번호' })
   contact: string;
 
-  @Column({ name: '카테고리' })
+  @Column({ comment: '카테고리' })
   category: string;
 
-  @Column({ name: '평점' })
+  @Column({ comment: '평점' })
   rating: number;
 
-  @Column({ name: '평점 개수' })
+  @Column({ comment: '평점 개수', name: 'rating_count' })
   ratingCount: number;
 
-  @Column({ name: '영업 시간' })
-  openingHours: string[];
+  @Column({ comment: '영업 시간', name: 'opening_hours' })
+  openingHours: string;
 
-  @Column({ name: '영업 여부' })
+  @Column({ comment: '영업 여부' })
   opening: boolean;
 
-  @Column({ name: '포장' })
+  @Column({ comment: '포장' })
   takeout: boolean;
 
-  @Column({ name: '배달' })
+  @Column({ comment: '배달' })
   delivery: boolean;
 
-  @Column({ name: '매장식사' })
+  @Column({ comment: '매장식사', name: 'dine_in' })
   dineIn: boolean;
 
-  @Column({ name: '애견동반' })
+  @Column({ comment: '애견동반', name: 'allow_dog' })
   allowDog: boolean;
 
-  @Column({ name: '예약' })
+  @Column({ comment: '예약' })
   reservable: boolean;
 
-  @Column({ name: '주차' })
+  @Column({ comment: '주차' })
   parking: boolean;
 
   @OneToOne(() => Marker, (marker) => marker.shop)

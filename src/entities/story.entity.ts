@@ -1,4 +1,3 @@
-import { IsString, MaxLength, MinLength } from 'class-validator';
 import {
   Column,
   Entity,
@@ -7,25 +6,20 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { Shop, Marker, User, Like } from './_index.entity';
 import { CommonEntity } from './common.entity';
-import { Shop } from './shop.entity';
-import { Marker } from './marker.entity';
-import { User } from './user.entity';
-import { Like } from './like.entity';
 
 @Entity()
 export class Story extends CommonEntity {
   @PrimaryGeneratedColumn({
-    name: '스토리 아이디',
+    comment: '스토리 아이디',
   })
   id: number;
 
   @Column({
-    name: '내용',
+    comment: '내용',
   })
-  @IsString()
-  @MinLength(5)
-  @MaxLength(300)
   content: string;
 
   @OneToMany(() => Like, (like) => like.story, { cascade: ['soft-remove'] })

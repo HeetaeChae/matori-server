@@ -7,27 +7,25 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { Shop, Story } from './_index.entity';
 import { CommonEntity } from './common.entity';
-import { Shop } from './shop.entity';
-import { Story } from './story.entity';
 
 @Entity()
 export class Marker extends CommonEntity {
   @PrimaryGeneratedColumn({
-    name: '마커 아이디',
+    comment: '마커 아이디',
   })
   id: number;
 
   @Column({
-    name: '위도',
+    comment: '위도',
   })
-  @IsNumber()
   latitude: number;
 
   @Column({
-    name: '경도',
+    comment: '경도',
   })
-  @IsNumber()
   longitude: number;
 
   @OneToOne(() => Shop, (shop) => shop.marker)

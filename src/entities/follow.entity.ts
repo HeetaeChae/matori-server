@@ -1,20 +1,24 @@
-import { JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { CommonEntity } from './common.entity';
-import { User } from './user.entity';
+import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
+import { User } from './_index.entity';
+import { CommonEntity } from './common.entity';
+
+@Entity()
 export class Follow extends CommonEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    comment: '팔로우 아이디',
+  })
   id: number;
 
   @ManyToOne(() => User, (user) => user.followers, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'follower_id' })
-  follower: User;
+  following: User;
 
   @ManyToOne(() => User, (user) => user.followings, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'following_id' })
-  following: User;
+  follower: User;
 }
